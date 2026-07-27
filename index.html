@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Serveren svarer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ash:#E4E7E3;
+    --ash-deep:#D3D8D2;
+    --ink:#141A17;
+    --pine:#2F5548;
+    --muted:#6E7A74;
+    --display:"Newsreader",Georgia,"Times New Roman",serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+
+  *{box-sizing:border-box}
+
+  html,body{height:100%}
+
+  body{
+    margin:0;
+    background:var(--ash);
+    color:var(--ink);
+    font-family:var(--mono);
+    display:grid;
+    place-items:center;
+    padding:2rem;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  main{
+    width:100%;
+    max-width:34rem;
+    animation:rise .7s cubic-bezier(.2,.8,.2,1) both;
+  }
+
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  .status{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    font-size:.7rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  .pulse{
+    width:7px;height:7px;border-radius:50%;
+    background:var(--pine);
+    position:relative;
+    flex:none;
+  }
+  .pulse::after{
+    content:"";
+    position:absolute;inset:0;border-radius:50%;
+    background:var(--pine);
+    animation:ping 2.4s ease-out infinite;
+  }
+  @keyframes ping{
+    0%{transform:scale(1);opacity:.5}
+    70%,100%{transform:scale(3.4);opacity:0}
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:300;
+    font-size:clamp(2.6rem,9vw,4.4rem);
+    line-height:1.02;
+    letter-spacing:-.02em;
+    margin:1.6rem 0 0;
+  }
+  h1 em{font-style:italic;color:var(--pine)}
+
+  p.lede{
+    font-family:var(--display);
+    font-size:1.05rem;
+    line-height:1.6;
+    color:var(--muted);
+    max-width:26rem;
+    margin:1rem 0 2.6rem;
+  }
+
+  dl{
+    margin:0;
+    border-top:1px solid var(--ash-deep);
+  }
+  .row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:1rem;
+    padding:.7rem 0;
+    border-bottom:1px solid var(--ash-deep);
+    font-size:.78rem;
+  }
+  dt{color:var(--muted);letter-spacing:.04em}
+  dd{margin:0;text-align:right;font-weight:500;overflow-wrap:anywhere}
+
+  footer{
+    margin-top:2.4rem;
+    font-size:.68rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important}
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="status"><span class="pulse"></span>Tilkobling opprettet</div>
+
+  <h1>Serveren <em>svarer.</em></h1>
+  <p class="lede">Denne siden ble levert over nettverket, ikke åpnet fra disk. Alt under er hentet fra din egen økt.</p>
+
+  <dl>
+    <div class="row"><dt>Vert</dt><dd id="host">—</dd></div>
+    <div class="row"><dt>Protokoll</dt><dd id="proto">—</dd></div>
+    <div class="row"><dt>Klokke</dt><dd id="clock">—</dd></div>
+    <div class="row"><dt>Oppe i</dt><dd id="uptime">—</dd></div>
+  </dl>
+
+  <footer>index.html · klar til bruk</footer>
+</main>
+
+<script>
+  const pad = n => String(n).padStart(2, "0");
+  const start = Date.now();
+
+  document.getElementById("host").textContent = location.host || "lokal fil";
+  document.getElementById("proto").textContent = location.protocol.replace(":", "");
+
+  function tick() {
+    const now = new Date();
+    document.getElementById("clock").textContent =
+      pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":" + pad(now.getSeconds());
+
+    const s = Math.floor((Date.now() - start) / 1000);
+    document.getElementById("uptime").textContent =
+      pad(Math.floor(s / 60)) + " min " + pad(s % 60) + " sek";
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
