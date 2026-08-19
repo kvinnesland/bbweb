@@ -8,20 +8,29 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:           #0d0b09;
-      --surface:      #17130f;
-      --surface-2:    #1d1712;
-      --gold:         #c8a96e;
-      --gold-soft:    rgba(200,169,110,0.10);
-      --gold-glow:    rgba(200,169,110,0.35);
-      --text:         #ede8df;
-      --text-mid:     #a09890;
-      --text-dim:     #6b6459;
-      --green:        #5cb88a;
-      --shadow-sm:    0 2px 10px rgba(0,0,0,0.35);
-      --shadow-md:    0 16px 40px -12px rgba(0,0,0,0.55);
-      --shadow-lg:    0 30px 70px -20px rgba(0,0,0,0.65);
+      --bg:           #f6f1e6;
+      --surface:      #fffdf9;
+      --surface-2:    #efe7d6;
+      --gold:         #8a6a37;
+      --gold-soft:    rgba(138,106,55,0.10);
+      --gold-glow:    rgba(138,106,55,0.30);
+      --text:         #201b14;
+      --text-mid:     #6b6152;
+      --text-dim:     #756b57;
+      --green:        #3f8f5c;
+      --shadow-sm:    0 2px 10px rgba(60,45,25,0.10);
+      --shadow-md:    0 16px 40px -12px rgba(60,45,25,0.14);
+      --shadow-lg:    0 30px 70px -20px rgba(60,45,25,0.18);
       --ease:         cubic-bezier(.16,1,.3,1);
+
+      /* footer runs as a deliberate dark, contrasting band, an espresso
+         slab under the ivory page, so it carries real weight instead of
+         blending into the light surface */
+      --footer-bg:      #1a1109;
+      --footer-ink:     #f4ecdd;
+      --footer-ink-dim: rgba(244,236,221,0.52);
+      --footer-gold:    #cda86a;
+      --footer-gold-hi: #e6c690;
     }
 
     html { scroll-behavior: smooth; }
@@ -44,7 +53,7 @@
       top: -10%; left: 50%;
       width: 1100px; height: 900px;
       transform: translateX(-50%);
-      background: radial-gradient(circle at 50% 0%, rgba(200,169,110,0.10), rgba(200,169,110,0) 60%);
+      background: radial-gradient(circle at 50% 0%, rgba(138,106,55,0.07), rgba(138,106,55,0) 60%);
       pointer-events: none;
       z-index: 0;
     }
@@ -75,13 +84,13 @@
       justify-content: space-between;
       padding: 0 48px;
       height: 58px;
-      background: rgba(13,11,9,0.80);
+      background: rgba(246,241,230,0.78);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       transition: box-shadow 0.3s var(--ease), background 0.3s var(--ease);
     }
     header.scrolled {
-      background: rgba(13,11,9,0.92);
+      background: rgba(246,241,230,0.94);
       box-shadow: var(--shadow-sm);
     }
     .logo {
@@ -116,7 +125,7 @@
     }
     nav a:hover { color: var(--text-mid); }
     nav a:hover::after { transform: scaleX(1); }
-    nav a.current { color: var(--gold); }
+    nav a.current { color: var(--text); }
     nav a.current::after { transform: scaleX(1); }
     .status {
       display: flex;
@@ -131,7 +140,7 @@
       width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 6px rgba(92,184,138,0.6);
+      box-shadow: 0 0 6px rgba(63,143,92,0.6);
     }
     .status-dot::after {
       content: '';
@@ -181,12 +190,13 @@
       margin-bottom: 28px;
     }
     .hero-origin a {
-      color: var(--gold);
+      color: var(--text);
       text-decoration: none;
-      opacity: 0.75;
-      transition: opacity 0.2s;
+      border-bottom: 1px solid var(--text-dim);
+      opacity: 0.8;
+      transition: opacity 0.2s, border-color 0.2s;
     }
-    .hero-origin a:hover { opacity: 1; }
+    .hero-origin a:hover { opacity: 1; border-bottom-color: var(--text); }
     .hero h1 {
       font-size: clamp(34px, 5vw, 58px);
       font-weight: 400;
@@ -198,7 +208,7 @@
     }
     .hero h1 em {
       font-style: italic;
-      color: var(--gold);
+      color: var(--text);
     }
     .hero-sub {
       font-size: 18px;
@@ -248,9 +258,8 @@
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--text-dim);
       margin-bottom: 14px;
-      opacity: 0.8;
     }
     .pillar p {
       font-size: 14px;
@@ -275,8 +284,7 @@
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.75;
+      color: var(--text-dim);
       margin-bottom: 20px;
     }
     .section-intro h2 {
@@ -324,7 +332,7 @@
       cursor: pointer;
       transition: color 0.2s, background 0.2s;
     }
-    .infra-group-label:hover { color: var(--text-mid); background: rgba(255,255,255,0.03); }
+    .infra-group-label:hover { color: var(--text-mid); background: rgba(40,30,15,0.045); }
     .group-chevron {
       color: var(--text-dim);
       font-size: 12px;
@@ -358,7 +366,7 @@
       position: relative;
       transition: background 0.2s var(--ease), transform 0.2s var(--ease);
     }
-    .item-row:hover { background: rgba(255,255,255,0.04); }
+    .item-row:hover { background: rgba(40,30,15,0.05); }
     .infra-list-item.active .item-row { background: var(--gold-soft); }
     .infra-list-item.active .item-row::before {
       content: '';
@@ -418,8 +426,7 @@
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
-      opacity: 0.8;
+      color: var(--text-dim);
       margin-bottom: 14px;
     }
     .detail-name {
@@ -444,7 +451,7 @@
     }
     .detail-body strong { color: var(--text); font-weight: 400; }
     .detail-replaces {
-      background: rgba(255,255,255,0.03);
+      background: rgba(40,30,15,0.035);
       border-radius: 10px;
       padding: 16px 18px;
       margin-top: auto;
@@ -487,67 +494,91 @@
       line-height: 1.8;
     }
     .contact-note a {
-      color: var(--gold);
+      color: var(--text);
       text-decoration: none;
+      border-bottom: 1px solid var(--text-dim);
       opacity: 0.85;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, border-color 0.2s;
     }
-    .contact-note a:hover { opacity: 1; }
+    .contact-note a:hover { opacity: 1; border-bottom-color: var(--text); }
 
     /* FOOTER */
     footer {
       position: relative;
       overflow: hidden;
-      background: var(--surface);
-      border-radius: 28px 28px 0 0;
-      padding: 56px 48px 40px;
-      box-shadow: 0 -30px 70px -30px rgba(0,0,0,0.55);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(205,168,106,0.10), transparent 55%),
+        var(--footer-bg);
+      border-radius: 22px 22px 0 0;
+      padding: 40px 40px 22px;
+      box-shadow: 0 -30px 60px -30px rgba(10,7,4,0.4);
       z-index: 1;
     }
     .footer-glow {
       position: absolute;
-      bottom: -160px; left: 50%;
-      width: 620px; height: 320px;
+      top: -110px; left: 50%;
+      width: 460px; height: 240px;
       transform: translateX(-50%);
-      background: radial-gradient(circle, var(--gold-soft), transparent 70%);
+      background: radial-gradient(circle, rgba(205,168,106,0.16), transparent 70%);
       pointer-events: none;
     }
     .footer-top {
       position: relative;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
-      padding-bottom: 36px;
+      padding-bottom: 26px;
+    }
+    .footer-brand .logo {
+      font-size: 12px;
+      line-height: 1;
+      letter-spacing: 0.06em;
+      color: var(--footer-ink);
+    }
+    .footer-brand .logo span {
+      display: inline-block;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-style: italic;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1;
+      vertical-align: -5px;
+      margin: 0 2px;
+      color: var(--footer-gold);
     }
     .footer-tagline {
-      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
-      font-size: 13px;
-      color: var(--text-dim);
-      margin-top: 8px;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-style: italic;
+      font-size: 12px;
+      color: var(--footer-ink-dim);
+      margin-top: 6px;
+      max-width: 260px;
     }
     .footer-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 13px 24px;
+      gap: 7px;
+      padding: 10px 20px;
       border-radius: 999px;
-      background: var(--gold-soft);
-      color: var(--gold);
+      border: 1px solid var(--footer-gold);
+      background: transparent;
+      color: var(--footer-gold);
       font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
       transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
     }
     .footer-cta:hover {
-      background: var(--gold);
-      color: #1a140c;
+      background: var(--footer-gold);
+      color: #1a1109;
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px -10px var(--gold-glow);
+      box-shadow: 0 14px 30px -12px rgba(205,168,106,0.45);
     }
     .cta-arrow { display: inline-block; transition: transform 0.25s var(--ease); }
     .footer-cta:hover .cta-arrow { transform: translateX(3px); }
@@ -558,15 +589,17 @@
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
+      padding-top: 16px;
     }
     footer span, footer a {
       font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
-      font-size: 12px;
-      color: var(--text-dim);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: var(--footer-ink-dim);
       text-decoration: none;
       transition: color 0.2s;
     }
-    footer a:hover { color: var(--gold); }
+    footer a:hover { color: var(--footer-gold); }
     .footer-links { display: flex; gap: 28px; }
 
     /* RESPONSIVE */
@@ -615,9 +648,10 @@
       .contact-note { padding: 8px 20px 64px; }
       .contact-note p { font-size: 15px; }
 
-      footer { padding: 40px 20px 28px; border-radius: 20px 20px 0 0; }
-      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; padding-bottom: 28px; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      footer { padding: 32px 20px 18px; border-radius: 20px 20px 0 0; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 16px; padding-bottom: 20px; }
+      .footer-cta { align-self: flex-start; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; padding-top: 12px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -625,6 +659,93 @@
       .reveal { opacity: 1; transform: none; transition: none; }
       .status-dot::after { animation: none; }
       * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+    /* BALL WIDGET — a little tilt-controlled golf ball that floats above
+       every bit of page content. Purely decorative, never blocks a click.
+       Mobile-only, and stays out of sight until the page has been idle. */
+    #ballStage {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      overflow: hidden;
+      pointer-events: none;
+      touch-action: none;
+    }
+    #ballShadow {
+      position: absolute;
+      width: 50px; height: 15px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(0,0,0,0.55), transparent 70%);
+      transform: translate(-50%, -50%);
+    }
+    #ball {
+      position: absolute;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: #f2efe6;
+      /* lighting lives here and stays screen-fixed, so it doesn't spin with the dimples */
+      box-shadow:
+        inset -6px -8px 14px rgba(0,0,0,0.30),
+        inset 5px 6px 10px rgba(255,255,255,0.75),
+        0 0 22px var(--gold-glow);
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+    /* dimple texture, rotates independently to fake rolling */
+    #ballTexture {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(115,107,90,0.5) 27%, transparent 29%),
+        radial-gradient(circle, rgba(115,107,90,0.5) 27%, transparent 29%);
+      background-size: 11px 11px, 11px 11px;
+      background-position: 0 0, 5.5px 5.5px;
+      will-change: transform;
+    }
+    #ballPermissionGate {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 32px;
+      text-align: center;
+      background: rgba(13,11,9,0.75);
+      backdrop-filter: blur(6px);
+      pointer-events: auto;
+    }
+    #ballPermissionGate.hidden { display: none; }
+    .ball-enable-btn {
+      padding: 16px 32px;
+      border-radius: 999px;
+      border: none;
+      background: var(--gold);
+      color: #1a140c;
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .ball-enable-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -8px var(--gold-glow); }
+    .ball-permission-hint {
+      max-width: 320px;
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    #ballStage.ball-visible { display: block; }
+    /* hard guarantee: never on desktop/landscape-wide screens, no matter what JS decides */
+    @media (min-width: 701px) {
+      #ballStage { display: none !important; }
     }
   </style>
 </head>
@@ -640,7 +761,7 @@
   </nav>
   <div class="status sans">
     <div class="status-dot"></div>
-    Alle tjenester operative
+    
   </div>
 </header>
 
@@ -649,35 +770,35 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-glow" id="heroGlow"></div>
-    <div class="hero-origin sans reveal">Et testmiljø for <a href="https://bas.no" target="_blank">Bas Kommunikasjon</a></div>
-    <h1 class="reveal">Nye ideer fortjener et sted<br>de kan feile <em>trygt.</em></h1>
+    <div class="hero-origin sans reveal">Dette er et testmiljø for <a href="https://bas.no" target="_blank">Bas Kommunikasjon</a></div>
+    <h1 class="reveal">Dette er en <em>beta-side</em><br>med de fordeler og ulemper det medfører :)</h1>
     <p class="hero-sub reveal">
-      basbeta.no er der vi prøver ting ut. Nye konsepter og tjenester lever her mens vi finner ut om de holder.
-      <strong>Har du fått en e-post eller lenke herfra, er det oss, og det er helt legitimt.</strong>
+      Her prøver vi ut ny ting. Det kan være konsepter, tjenester eller demoer. Her kan de bo mens vi finner ut om de holder vann.
+      <strong>Har du fått en e-post eller lenke med domenet <em>basbeta.no</em>, er det oss, og det er helt legitimt.</strong>
     </p>
   </div>
 
   <!-- PILLARS -->
   <div class="pillars">
     <div class="pillar reveal">
-      <div class="pillar-label sans">Trygt å leke</div>
+      <div class="pillar-label sans">Trygt å teste</div>
       <p>
         <strong>Men ting kan gå galt</strong>
-        Vi eksperimenterer på basbeta.no nettopp for at ingenting i full produksjon skal ryke.
+        Vi eksperimenterer på basbeta.no nettopp for at ingenting i full produksjon skal kunne påvirkes.
       </p>
     </div>
     <div class="pillar reveal">
       <div class="pillar-label sans">Alt av data i Europa</div>
       <p>
-        <strong>Falkenstein, Tyskland.</strong>
-        Minimalt med GDPR og personvern-krøll. Ingen data forlater EU.
+        <strong>Noen tester har brukere</strong>
+        Med selv-hosted software på Tyske servere får vi minimalt med GDPR og personvern-krøll.
       </p>
     </div>
     <div class="pillar reveal">
       <div class="pillar-label sans">For hele teamet</div>
       <p>
         <strong>Ikke bare for utviklere.</strong>
-        Infrastrukturen er satt opp slik at vi senker terskelen for å bidra, uansett om du kan kode eller ikke.
+        Infrastrukturen er satt opp slik at vi senker terskelen internt for å teste, både for teknikere og vibe-kodere.
       </p>
     </div>
   </div>
@@ -686,8 +807,8 @@
   <section id="infrastruktur">
     <div class="section-label sans reveal">Infrastruktur</div>
     <div class="section-intro reveal">
-      <h2>Hva som kjører</h2>
-      <p>Infrastrukturen er basert på tyske Hetzner, og vi tester i all hovedsak selvhosted programvare oppå denne. Velg en kategori og så tjeneste for å se hva den gjør og hva den erstatter.</p>
+      <h2>Hva ligger i bunn?</h2>
+      <p>For å enkelt kunne publisere nye tjenester og konsepter er vi avhengig av en solid infrastruktur og en haug med tjenester for å håndtere lagring, sikkerhet, nettverk, tilgangsstyring osv. Vi har basert oss på tyske Hetzner, med i all hovedsak selvhosted programvare oppå for å løse alle de vanlige hostingoppgavene. Velg en kategori og så tjeneste for å se hva den gjør og hva den erstatter.</p>
     </div>
 
     <div class="infra-explorer reveal">
@@ -761,7 +882,7 @@
         <div class="detail-content" id="dc-hetzner">
           <div class="detail-eyebrow sans">Serverfundament</div>
           <div class="detail-name">Hetzner VPS</div>
-          <div class="detail-role sans">Falkenstein, Tyskland</div>
+          <div class="detail-role sans">Hosting</div>
           <div class="detail-body">Serveren alt kjører på. Vi valgte Hetzner fordi de er tyske, pålitelige og ikke bundet opp mot de store amerikanske skyleverandørene. <strong>Data forlater aldri EU.</strong></div>
           <div class="detail-replaces"><div class="meta-label sans">Erstatter</div><div class="meta-value sans">AWS, Google Cloud, DigitalOcean</div></div>
         </div>
@@ -778,7 +899,7 @@
           <div class="detail-eyebrow sans">Deploy</div>
           <div class="detail-name">Coolify</div>
           <div class="detail-role sans">Fra kode til kjørende app</div>
-          <div class="detail-body">Du pusher til GitHub, Coolify tar seg av resten. Bygging, utrulling, domener og SSL skjer av seg selv. <strong>Det fungerer i praksis likt Vercel og Netlify, men på vår egen server i EU og dermed har vi mer kontroll, bedre sikkerhet og lavere kostnader.</strong></div>
+          <div class="detail-body">Du pusher til GitHub, Coolify tar seg av resten. Bygging, utrulling, subdomener og SSL skjer av seg selv. <strong>Det fungerer i praksis likt Vercel og Netlify, men på vår egen server i EU og dermed har vi mer kontroll, bedre sikkerhet og lavere kostnader.</strong></div>
           <div class="detail-replaces"><div class="meta-label sans">Erstatter</div><div class="meta-value sans">Vercel, Netlify, Heroku, Render, Railway</div></div>
         </div>
 
@@ -786,7 +907,7 @@
           <div class="detail-eyebrow sans">Database</div>
           <div class="detail-name">PostgreSQL</div>
           <div class="detail-role sans">SQL-database per prosjekt</div>
-          <div class="detail-body">Alle prosjekter som trenger det får en database som kjører på Hetzner. Ingen amerikanske skytjenester, ingen egress fees og GDPR og personverndiskusjonen kan derfor konsentrere seg om sikkerhet og ikke politikk. <strong>Brukerdata forblir i Europa.</strong></div>
+          <div class="detail-body">Alle prosjekter som trenger det får en database som kjører i Coolify på Hetzner. Ingen amerikanske skytjenester, ingen egress fees og GDPR og personverndiskusjonen kan derfor konsentrere seg om sikkerhet og ikke politikk. <strong>Brukerdata forblir i Europa.</strong></div>
           <div class="detail-replaces"><div class="meta-label sans">Erstatter</div><div class="meta-value sans">Supabase, Firebase, PlanetScale, Neon</div></div>
         </div>
 
@@ -816,9 +937,9 @@
 
         <div class="detail-content" id="dc-brevo">
           <div class="detail-eyebrow sans">E-post</div>
-          <div class="detail-name">IDA/Brevo/mfl</div>
+          <div class="detail-name">IDA / Brevo / mfl</div>
           <div class="detail-role sans">Transaksjonell e-post</div>
-          <div class="detail-body">Sender e-poster automatisk fra apper: velkomstmeldinger, passordresettpåminnelser og varsler. <strong>Europeisk leverandører</strong> og den eneste delen i stacken som flytter data ut av serveren og dermed krever en databehandleravtale.</div>
+          <div class="detail-body">Sender e-poster automatisk fra apper: velkomstmeldinger, passordresettpåminnelser og varsler. <strong>Europeiske leverandører</strong> og den eneste delen i stacken som flytter data ut av serveren og dermed krever en databehandleravtale.</div>
           <div class="detail-replaces"><div class="meta-label sans">Erstatter</div><div class="meta-value sans">SendGrid, Mailchimp, Mailgun</div></div>
         </div>
 
@@ -841,7 +962,7 @@
         <div class="detail-content" id="dc-netdata">
           <div class="detail-eyebrow sans">Serverovervåking</div>
           <div class="detail-name">Netdata</div>
-          <div class="detail-role sans">netdata.basbeta.no</div>
+          <div class="detail-role sans">Rapporter, Innsikt og prediksjoner</div>
           <div class="detail-body">Sanntidsgrafer for CPU, minne, disk og nettverkstrafikk. En ordentlig nerdeoversikt for å kunne se hvor mye ressurser som konsumeres, både av hvert enkelt prosjekt og samlet slik at vi vet hvordan vi skal håndtere belastningen.</div>
           <div class="detail-replaces"><div class="meta-label sans">Erstatter</div><div class="meta-value sans">Datadog, New Relic, Grafana Cloud</div></div>
         </div>
@@ -860,7 +981,7 @@
 
   <!-- KONTAKT -->
   <section id="kontakt" class="contact-note">
-    <p class="reveal">Nysgjerrig på noe av det du har lest her? <a href="https://bas.no" target="_blank">Ta kontakt med oss</a>, og vi forteller gjerne mer.</p>
+    <p class="reveal">Nysgjerrig på noe av det du har lest her? <a href="mailto:haavard.kvinnesland@bas.no" target="_blank">Ta kontakt med oss</a>, og vi forteller gjerne mer.</p>
   </section>
 
 </main>
@@ -870,15 +991,14 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="logo sans">bas<span>beta</span>.no</div>
-      <p class="footer-tagline">Der Bas Kommunikasjon tester nye ideer, trygt.</p>
+      <p class="footer-tagline">En betaside for betatesting av betating.</p>
     </div>
-    <a class="footer-cta" href="https://bas.no" target="_blank">Ta kontakt <span class="cta-arrow">→</span></a>
+    <a class="footer-cta" href="mailto:haavard.kvinnesland@bas.no" target="_blank">Ta kontakt <span class="cta-arrow">→</span></a>
   </div>
   <div class="footer-bottom">
     <span class="sans">basbeta.no eies av bas.no</span>
     <div class="footer-links">
       <a href="https://bas.no" target="_blank" class="sans">bas.no</a>
-      <a href="https://status.basbeta.no" target="_blank" class="sans">status.basbeta.no</a>
     </div>
   </div>
 </footer>
@@ -1062,6 +1182,191 @@
   } else if (isMobileQuery.addListener) {
     isMobileQuery.addListener(handleBreakpointChange);
   }
+</script>
+
+<!-- BALL WIDGET: floats above all page content, tilt-controlled where available -->
+<div id="ballStage">
+  <div id="ballShadow"></div>
+  <div id="ball"><div id="ballTexture"></div></div>
+  <div id="ballPermissionGate">
+    <button class="ball-enable-btn" id="ballEnableBtn">Aktiver bevegelse</button>
+    <p class="ball-permission-hint">Vi bruker telefonens bevegelsessensor til å style ballen. Ingenting lagres eller sendes noe sted, det skjer helt lokalt i telefonen.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Mobile-only feature. On a desktop-sized viewport, do nothing at all: no
+  // listeners, no animation loop, nothing in the DOM ever becomes visible
+  // (the CSS media query above backs this up independently).
+  if (!window.matchMedia('(max-width: 700px)').matches) return;
+
+  var stage = document.getElementById('ballStage');
+  var ball = document.getElementById('ball');
+  var ballTexture = document.getElementById('ballTexture');
+  var ballShadow = document.getElementById('ballShadow');
+  var gate = document.getElementById('ballPermissionGate');
+  var enableBtn = document.getElementById('ballEnableBtn');
+
+  // use viewport size, not stage.clientWidth/Height: the stage is display:none
+  // until the idle reveal, and a display:none element always measures 0x0.
+  var W = window.innerWidth, H = window.innerHeight;
+  var RADIUS = 28;
+
+  // physics state
+  var x = W / 2, y = H * 0.3;
+  var vx = 0, vy = 0;
+  var gx = 0, gy = 1; // gravity direction, (0,1) = straight down the screen
+
+  var GRAVITY = 0.55;
+  var FRICTION = 0.985;
+  var RESTITUTION = 0.62;
+  var REST_DAMPING = 0.90; // extra damping once nearly settled, kills jitter
+
+  var tiltGamma = 0, tiltBeta = 0;
+  var usingSensors = false;
+  var rotationDeg = 0; // accumulated spin, driven by "rolling without slipping"
+  var ballPrefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+
+  function setGravityFromTilt(gamma, beta) {
+    // gamma: left/right tilt (-90..90), beta: front/back tilt (-180..180)
+    // Left/right tilt sways the ball sideways. Small beta deviation from the
+    // natural "holding it up" angle nudges the ball toward/away from you.
+    var gxRaw = gamma / 45;
+    var gyBias = (beta - 60) / 90; // ~60deg = comfortable holding angle
+
+    gx = Math.max(-1.4, Math.min(1.4, gxRaw));
+    gy = 1 + Math.max(-0.6, Math.min(0.6, gyBias * 0.5));
+  }
+
+  function onOrientation(e) {
+    if (e.gamma === null || e.beta === null) return;
+    tiltGamma = e.gamma;
+    tiltBeta = e.beta;
+    setGravityFromTilt(tiltGamma, tiltBeta);
+  }
+
+  function startSensors() {
+    window.addEventListener('deviceorientation', onOrientation, true);
+    usingSensors = true;
+    gate.classList.add('hidden');
+  }
+
+  function startMouseFallback() {
+    gate.classList.add('hidden');
+    window.addEventListener('mousemove', function (e) {
+      var relX = (e.clientX / W - 0.5) * 2;
+      var relY = (e.clientY / H - 0.5) * 2;
+      gx = Math.max(-1.4, Math.min(1.4, relX * 1.4));
+      gy = 1 + relY * 0.35;
+    });
+  }
+
+  function requestBallSensorPermission() {
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission().then(function (state) {
+        if (state === 'granted') {
+          startSensors();
+        } else {
+          startMouseFallback();
+        }
+      }).catch(function () { startMouseFallback(); });
+    } else if ('DeviceOrientationEvent' in window) {
+      startSensors();
+    } else {
+      startMouseFallback();
+    }
+  }
+
+  enableBtn.addEventListener('click', requestBallSensorPermission);
+
+  // Android / desktop browsers that don't require an explicit permission
+  // prompt can start immediately without waiting for the tap. iOS 13+
+  // Safari needs the tap, so the gate stays up for those until then.
+  var needsExplicitPermission = typeof DeviceOrientationEvent !== 'undefined' &&
+    typeof DeviceOrientationEvent.requestPermission === 'function';
+  var hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (!needsExplicitPermission) {
+    if ('DeviceOrientationEvent' in window && hasTouch) {
+      startSensors();
+    } else {
+      startMouseFallback();
+    }
+  }
+
+  // --- idle reveal: the ball (and, on iPhone, the permission button) stays
+  // completely out of the page until it's been left alone for 5 seconds.
+  // Touching the page again hides it and restarts the 5-second wait.
+  var IDLE_MS = 5000;
+  var idleTimer = null;
+
+  function showBall() {
+    stage.classList.add('ball-visible');
+  }
+
+  function hideBall() {
+    stage.classList.remove('ball-visible');
+  }
+
+  function resetIdleTimer(e) {
+    // ignore interactions with the ball widget itself (e.g. tapping the
+    // permission button), only page activity should postpone the reveal
+    if (e && e.target && stage.contains(e.target)) return;
+    hideBall();
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(showBall, IDLE_MS);
+  }
+
+  ['touchstart', 'touchmove', 'scroll', 'click', 'pointerdown'].forEach(function (evt) {
+    window.addEventListener(evt, resetIdleTimer, { passive: true });
+  });
+  resetIdleTimer(); // start the initial 5-second countdown from page load
+
+  function step() {
+    vx += gx * GRAVITY;
+    vy += gy * GRAVITY;
+    vx *= FRICTION;
+    vy *= FRICTION;
+
+    x += vx;
+    y += vy;
+
+    if (x - RADIUS < 0) { x = RADIUS; vx = -vx * RESTITUTION; }
+    if (x + RADIUS > W) { x = W - RADIUS; vx = -vx * RESTITUTION; }
+    if (y - RADIUS < 0) { y = RADIUS; vy = -vy * RESTITUTION; }
+    if (y + RADIUS > H) {
+      y = H - RADIUS;
+      vy = -vy * RESTITUTION;
+      vx *= REST_DAMPING;
+    }
+
+    // rolling without slipping: angle (radians) = distance travelled / radius.
+    var speed = Math.sqrt(vx * vx + vy * vy);
+    var spinSign = Math.abs(vx) >= Math.abs(vy)
+      ? (vx === 0 ? 1 : Math.sign(vx))
+      : (vy === 0 ? 1 : Math.sign(vy));
+    rotationDeg += spinSign * (speed / RADIUS) * (180 / Math.PI);
+
+    ball.style.transform = 'translate(' + (x - RADIUS) + 'px,' + (y - RADIUS) + 'px)';
+    ballTexture.style.transform = 'rotate(' + rotationDeg.toFixed(1) + 'deg)';
+    ballShadow.style.left = x + 'px';
+    ballShadow.style.top = (Math.min(y + RADIUS - 4, H - 8)) + 'px';
+
+    requestAnimationFrame(step);
+  }
+
+  resize();
+  ball.style.transform = 'translate(' + (x - RADIUS) + 'px,' + (y - RADIUS) + 'px)';
+  requestAnimationFrame(step);
+})();
 </script>
 
 </body>
