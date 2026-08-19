@@ -813,8 +813,8 @@
 
     <div class="infra-explorer reveal">
       <div class="infra-nav">
-        <div class="infra-group">
-          <button class="infra-group-label sans" aria-expanded="false"><span>Et sted appene kan kjøre</span><span class="group-chevron">›</span></button>
+        <div class="infra-group open">
+          <button class="infra-group-label sans" aria-expanded="true"><span>Et sted appene kan kjøre</span><span class="group-chevron">›</span></button>
           <div class="group-shell"><ul class="infra-list">
             <li class="infra-list-item" data-id="hetzner">
               <button class="item-row"><span class="item-name sans">Hetzner VPS</span><span class="item-chevron">›</span></button>
@@ -828,7 +828,7 @@
           </ul></div>
         </div>
         <div class="infra-group">
-          <button class="infra-group-label sans" aria-expanded="false"><span>Et sted dataen bor trygt</span><span class="group-chevron">›</span></button>
+          <button class="infra-group-label sans" aria-expanded="false"><span>Et sted data bor trygt</span><span class="group-chevron">›</span></button>
           <div class="group-shell"><ul class="infra-list">
             <li class="infra-list-item" data-id="postgres">
               <button class="item-row"><span class="item-name sans">PostgreSQL</span><span class="item-chevron">›</span></button>
@@ -1168,6 +1168,29 @@
       }
     });
   });
+
+  /* --- default selection: Hetzner VPS starts open, matching whichever
+     layout (desktop split-view or mobile accordion) is active on load --- */
+  (function initDefaultSelection() {
+    var defaultItem = document.querySelector('.infra-list-item[data-id="hetzner"]');
+    if (!defaultItem) return;
+    if (isMobileQuery.matches) {
+      var content = document.getElementById('dc-hetzner');
+      if (!content) return;
+      var shell = document.createElement('div');
+      shell.className = 'accordion-shell open'; // already open, no entry animation on load
+      var inner = document.createElement('div');
+      inner.className = 'infra-detail mobile-slot';
+      shell.appendChild(inner);
+      inner.appendChild(content);
+      content.classList.add('visible');
+      defaultItem.insertAdjacentElement('afterend', shell);
+      defaultItem.classList.add('active');
+      openShell = { li: defaultItem, shell: shell };
+    } else {
+      showDesktopDetail(defaultItem, 'hetzner');
+    }
+  })();
 
   /* reset accordion/split state cleanly when crossing the mobile breakpoint */
   function handleBreakpointChange() {
